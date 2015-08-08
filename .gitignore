@@ -55,7 +55,7 @@ target/
 .idea/
 
 # ConfigFile
-app/config.py
+config.py
 
 # Do not add database file
 *.db
