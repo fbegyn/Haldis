@@ -1,0 +1,85 @@
+{# This template contains all items every page should contain (ex. navbar, footer)
+To use it you must extend this page and fill the block "content" #}
+
+{% set active_page = active_page|default('home') -%}
+{% set navbar = [('home', 'Home'), ('orders', 'Orders'), ('stats', 'Stats')] -%}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Haldis">
+
+    <script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+
+    <!-- GitHub buttons integration for footer -->
+    <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <title> Haldis - {{ active_page|capitalize }} </title>
+</head>
+
+<body style="padding-top: 70px">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Johan</a>
+            <button type="button" class="navbar-toggle collapsed dropdown" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                {% for id, text in navbar -%}
+                    <li class="{{ 'active' if active_page in id else '' }}">
+                        <a href="{{ url_for(id) }}">{{ text|e }}</a>
+                    </li>
+                {% endfor -%}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a>Login</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    {# Block to be filled on each page. #}
+    {% block content -%}{%- endblock %}
+</div>
+
+<footer>
+    <hr>
+    <div class="container">
+        <div class="pull-right">Made with ❤ by <a href="http://zeus.ugent.be">Zeus WPI</a></div>
+        <div class="pull-left"><a class="github-button" href="https://github.com/ZeusWPI/haldis"
+                                  data-icon="octicon-star" data-style="mega"
+                                  data-count-href="/ZeusWPI/Haldis/stargazers"
+                                  data-count-api="/repos/ZeusWPI/Haldis#stargazers_count"
+                                  data-count-aria-label="# stargazers on GitHub"
+                                  aria-label="Star ZeusWPI/Haldis on GitHub">Star</a></div>
+        <div class="text-center"><a href="http://github.com/ZeusWPI/Haldis"> ©{{ ""|year }}</a></div>
+    </div>
+</footer>
+</body>
+
+</html>
