@@ -22,5 +22,5 @@ def route(app):
 
 def add_filters(app):
     @app.template_filter('year')
-    def year():
-        get_current_year()
+    def year(_):
+        return get_current_year()
