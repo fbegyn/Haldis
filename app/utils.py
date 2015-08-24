@@ -1,5 +1,5 @@
 from datetime import datetime
 
 
-def year():
+def get_current_year():
     return str(datetime.now().year)
