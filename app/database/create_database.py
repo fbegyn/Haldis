@@ -1,8 +1,7 @@
 from app import db
-import add_oceans_garden, add_admins, add_simpizza, add_primadonna
+import add_oceans_garden, add_admins, add_simpizza, add_primadonna, add_fom
 
-
-entry_sets = {"Admins": add_admins.add, "Ocean's Garden": add_oceans_garden.add, "SimPizza": add_simpizza.add, "Primadonna": add_primadonna.add}
+entry_sets = {"Admins": add_admins.add, "Ocean's Garden": add_oceans_garden.add, "SimPizza": add_simpizza.add, "Primadonna": add_primadonna.add, "Frag-o-matic": add_fom.add}
 yes = ["yes", "y", "Y"]
 no = ["no", "n", "N"]
 
