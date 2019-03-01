@@ -3,15 +3,6 @@ from models import User
 
 
 def add():
-    feli = User()
-    feli.configure("feliciaan", True, 0)
-    db.session.add(feli)
-
-    destro = User()
-    destro.configure('destro', True, 0)
-    db.session.add(destro)
-
-    iepoev = User()
-    iepoev.configure('iepoev', True, 1)
-    db.session.add(iepoev)
-    # To future developers, add yourself here
+    francis = User()
+    francis.configure("francis", True, 0)
+    db.session.add(francis)
