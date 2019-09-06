@@ -3,7 +3,7 @@ from datetime import datetime
 from threading import Thread
 
 import requests
-from flask import current_app as app
+from flask import current_app
 from flask import url_for
 
 
@@ -22,13 +22,14 @@ def post_order_to_webhook(order_item):
             remaining_minutes(order_item.stoptime),
             url_for("order_bp.order", id=order_item.id, _external=True),
         )
-    webhookthread = WebhookSenderThread(message)
+    webhookthread = WebhookSenderThread(current_app, message)
     webhookthread.start()
 
 
 class WebhookSenderThread(Thread):
-    def __init__(self, message):
+    def __init__(self, app, message):
         super(WebhookSenderThread, self).__init__()
+        self.app = app
         self.message = message
 
     def run(self):
@@ -36,11 +37,11 @@ class WebhookSenderThread(Thread):
 
     def slack_webhook(self):
         js = json.dumps({"text": self.message})
-        url = app.config["SLACK_WEBHOOK"]
+        url = self.app.config["SLACK_WEBHOOK"]
         if len(url) > 0:
             requests.post(url, data=js)
         else:
-            app.logger.info(str(js))
+            self.app.logger.info(str(js))
 
 
 def remaining_minutes(value):
