@@ -1,6 +1,8 @@
-from app import db
+from app import create_app
+from models import db
 import add_oceans_garden, add_admins, add_simpizza, add_primadonna, add_fitchen, add_fom
 
+manager = create_app()
 
 entry_sets = {
     "Admins": add_admins.add,
@@ -8,7 +10,7 @@ entry_sets = {
     "SimPizza": add_simpizza.add,
     "Primadonna": add_primadonna.add,
     "Fitchen": add_fitchen.add,
-    "Frag-o-matic": add_from.add
+    "Frag-o-matic": add_fom.add
 }
 
 yes = ["yes", "y", "Y"]
