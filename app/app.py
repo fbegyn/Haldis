@@ -22,7 +22,7 @@ def create_app():
     # Load the config file
     app.config.from_object("config.Configuration")
 
-    manager = register_plugins(app, debug=app.debug)
+    manager = register_plugins(app)
     add_handlers(app)
     add_routes(app)
     add_template_filters(app)
@@ -31,7 +31,7 @@ def create_app():
     return manager
 
 
-def register_plugins(app, debug: bool):
+def register_plugins(app):
     # Register Airbrake and enable the logrotation
     if not app.debug:
         timedFileHandler = TimedRotatingFileHandler(
