@@ -5,14 +5,12 @@ from logging.handlers import TimedRotatingFileHandler
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap, StaticCDN
 from flask_debugtoolbar import DebugToolbarExtension
-from flask_login import LoginManager
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager, Server
 
 from admin import init_admin
 from login import init_login
 from models import db
-from models.anonymous_user import AnonymousUser
 from utils import euro_string
 
 
@@ -70,7 +68,7 @@ def register_plugins(app):
     # Load the flask debug toolbar
     toolbar = DebugToolbarExtension(app)
 
-    return manager
+    return app, manager
 
 
 def add_handlers(app):
@@ -124,5 +122,5 @@ def add_template_filters(app):
 
 # For usage when you directly call the script with python
 if __name__ == "__main__":
-    manager = create_app()
+    app, manager = create_app()
     manager.run()

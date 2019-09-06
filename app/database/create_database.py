@@ -1,15 +1,11 @@
 from app import create_app
 from models import db
-import add_oceans_garden, add_admins, add_simpizza, add_primadonna, add_fitchen, add_fom
+import add_admins, add_fom
+from app import create_app
 
-manager = create_app()
 
 entry_sets = {
     "Admins": add_admins.add,
-    "Ocean's Garden": add_oceans_garden.add,
-    "SimPizza": add_simpizza.add,
-    "Primadonna": add_primadonna.add,
-    "Fitchen": add_fitchen.add,
     "Frag-o-matic": add_fom.add
 }
 
@@ -75,6 +71,8 @@ def add_to_current():
 def init():
     print("Database modification script!")
     print("=============================\n\n")
+    app, manager = create_app()
+    db.init_app(app)
     if check_if_overwrite():
         recreate_from_scratch()
     else:
