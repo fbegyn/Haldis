@@ -47,19 +47,6 @@ def register_plugins(app, debug: bool):
         loglogger.addHandler(timedFileHandler)
         app.logger.addHandler(timedFileHandler)
 
-        airbrakelogger = logging.getLogger("airbrake")
-
-        # Airbrake
-        airbrake = Airbrake(
-            project_id=app.config["AIRBRAKE_ID"], api_key=app.config["AIRBRAKE_KEY"]
-        )
-        # ugly hack to make this work for out errbit
-        airbrake._api_url = "http://errbit.awesomepeople.tv/api/v3/projects/{}/notices".format(
-            airbrake.project_id
-        )
-
-        airbrakelogger.addHandler(AirbrakeHandler(airbrake=airbrake))
-        app.logger.addHandler(AirbrakeHandler(airbrake=airbrake))
 
     # Initialize SQLAlchemy
     db.init_app(app)
