@@ -7,7 +7,6 @@ from flask_bootstrap import Bootstrap, StaticCDN
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
 from flask_migrate import Migrate, MigrateCommand
-from flask_oauthlib.client import OAuth, OAuthException
 from flask_script import Manager, Server
 
 from admin import init_admin
@@ -15,7 +14,6 @@ from login import init_login
 from models import db
 from models.anonymous_user import AnonymouseUser
 from utils import euro_string
-from zeus import init_oauth
 
 
 def create_app():
@@ -65,10 +63,6 @@ def register_plugins(app, debug: bool):
     login_manager.anonymous_user = AnonymouseUser
     init_login(app)
 
-    # Add oauth
-    zeus = init_oauth(app)
-    app.zeus = zeus
-
     # Load the bootstrap local cdn
     Bootstrap(app)
     app.config["BOOTSTRAP_SERVE_LOCAL"] = True
@@ -93,8 +87,6 @@ def add_handlers(app):
 
 
 def add_routes(application):
-    # import views  # TODO convert to blueprint
-    # import views.stats  # TODO convert to blueprint
 
     from views.order import order_bp
     from views.general import general_bp

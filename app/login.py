@@ -1,29 +1,24 @@
 from flask import redirect, abort, session, url_for, render_template, Blueprint
 from flask_login import LoginManager, current_user, logout_user
 
-from app import app
-from models import User
-from zeus import zeus_login
-
 import forms
-
+from models import User
 from zeus import login_and_redirect_user, create_user
 
 auth_bp = Blueprint("auth_bp", __name__)
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-
 
 def init_login(app):
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+
     @app.login_manager.user_loader
     def load_user(userid):
         return User.query.filter_by(id=userid).first()
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login(login_form=None):
-    # return zeus_login()
     login_form = forms.LoginForm()
     if login_form.validate_on_submit():
         username = login_form.username.data

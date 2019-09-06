@@ -6,7 +6,6 @@ from flask_wtf import FlaskForm as Form
 from wtforms import SelectField, DateTimeField, validators, SubmitField, StringField
 
 from models import User, Location
-from utils import euro
 
 from models import Location, User
 from utils import euro_string

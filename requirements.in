@@ -4,9 +4,9 @@ Flask-Bootstrap
 Flask-SQLAlchemy
 Flask-DebugToolbar
 Flask-WTF
-Flask-OAuthlib
 Flask-Admin
 Flask-Migrate
 Flask-Script
 black
 pymysql
+requests
