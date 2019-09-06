@@ -3,7 +3,10 @@ from datetime import datetime, timedelta
 from flask import session
 from flask_login import current_user
 from flask_wtf import FlaskForm as Form
-from wtforms import DateTimeField, SelectField, StringField, SubmitField, validators
+from wtforms import SelectField, DateTimeField, validators, SubmitField, StringField
+
+from models import User, Location
+from utils import euro
 
 from models import Location, User
 from utils import euro_string
@@ -67,3 +70,8 @@ class AnonOrderItemForm(OrderItemForm):
             self.name.errors.append("Name already in use")
             return False
         return True
+
+
+class LoginForm(Form):
+    username = StringField('Name', validators=[validators.required()])
+    submit_button = SubmitField('Submit')

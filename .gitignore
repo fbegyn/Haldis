@@ -64,3 +64,6 @@ app/config.py
 *.db
 
 tmp/
+
+
+venv/
