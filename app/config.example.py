@@ -8,5 +8,3 @@ class Configuration(object):
     SECRET_KEY = "<change>"
     SLACK_WEBHOOK = "<add url>"
     LOGFILE = "haldis.log"
-    ZEUS_KEY = "tomtest"
-    ZEUS_SECRET = "blargh"

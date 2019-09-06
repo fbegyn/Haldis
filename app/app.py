@@ -12,7 +12,7 @@ from flask_script import Manager, Server
 from admin import init_admin
 from login import init_login
 from models import db
-from models.anonymous_user import AnonymouseUser
+from models.anonymous_user import AnonymousUser
 from utils import euro_string
 
 
@@ -52,15 +52,12 @@ def register_plugins(app, debug: bool):
     migrate = Migrate(app, db)
     manager = Manager(app)
     manager.add_command("db", MigrateCommand)
-    manager.add_command("runserver", Server(port=8000))
+    manager.add_command("runserver", Server(host="0.0.0.0", port=8000))
 
     # Add admin interface
     init_admin(app, db)
 
     # Init login manager
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-    login_manager.anonymous_user = AnonymouseUser
     init_login(app)
 
     # Load the bootstrap local cdn
@@ -93,13 +90,11 @@ def add_routes(application):
     from views.stats import stats_blueprint
     from views.debug import debug_bp
     from login import auth_bp
-    from zeus import oauth_bp
 
     application.register_blueprint(general_bp, url_prefix="/")
     application.register_blueprint(order_bp, url_prefix="/order")
     application.register_blueprint(stats_blueprint, url_prefix="/stats")
     application.register_blueprint(auth_bp, url_prefix="/")
-    application.register_blueprint(oauth_bp, url_prefix="/")
 
     if application.debug:
         application.register_blueprint(debug_bp, url_prefix="/debug")

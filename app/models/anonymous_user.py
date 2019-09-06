@@ -1,4 +1,4 @@
-class AnonymouseUser:
+class AnonymousUser:
     id = None
 
     def is_active(self):

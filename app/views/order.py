@@ -1,7 +1,6 @@
 import random
 from datetime import datetime
 
-# from flask import current_app as app
 from flask import (
     Blueprint,
     abort,
@@ -229,7 +228,6 @@ def select_user(items):
 
 
 def get_orders(expression=None):
-    orders = []
     if expression is None:
         expression = (datetime.now() > Order.starttime) & (
             Order.stoptime > datetime.now()

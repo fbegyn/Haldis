@@ -6,7 +6,7 @@
 
 {% block container %}
   <h1>Login</h1>
-    <form method="post" action="{{ url_for('.login') }}">
+    <form method="post" action="{{ url_for('auth_bp.login') }}">
             {{ form.csrf_token }}
             <div class="form-group{{ ' has-error' if form.username.errors }}{{ ' required' if form.username.flags.required }}">
                 {{ form.username.label(class='control-label') }}
