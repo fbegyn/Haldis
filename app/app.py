@@ -2,7 +2,6 @@ import logging
 from datetime import datetime
 from logging.handlers import TimedRotatingFileHandler
 
-from airbrake import Airbrake, AirbrakeHandler
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap, StaticCDN
 from flask_debugtoolbar import DebugToolbarExtension
