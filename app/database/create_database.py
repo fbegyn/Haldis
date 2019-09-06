@@ -1,8 +1,8 @@
+import add_admins
+import add_fom
 from app import create_app
+from flask import current_app
 from models import db
-import add_admins, add_fom
-from app import create_app
-
 
 entry_sets = {
     "Admins": add_admins.add,
@@ -15,7 +15,8 @@ no = ["no", "n", "N"]
 
 # Commit all the things
 def commit():
-    db.session.commit()
+    with current_app.app_context():
+        db.session.commit()
     print("Committing successful")
 
 
@@ -72,7 +73,8 @@ def init():
     print("Database modification script!")
     print("=============================\n\n")
     app, manager = create_app()
-    db.init_app(app)
+    app.app_context().push()
+
     if check_if_overwrite():
         recreate_from_scratch()
     else:

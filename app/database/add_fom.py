@@ -29,7 +29,7 @@ flammage = {
 
 def add():
     flam = Location()
-    flam.configure("Flammage FoM catering", "De toog, waar anders", "")
+    flam.configure("Flammage FoM catering", "De toog, waar anders", "", "https://www.fom.be/contents/view/food-and-drink")
     db.session.add(flam)
     for food, price in flammage.items():
         entry = Product()
